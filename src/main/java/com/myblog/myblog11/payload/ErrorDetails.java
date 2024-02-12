@@ -1,23 +1,17 @@
 package com.myblog.myblog11.payload;
 
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDto {
-    @Id
-    private long id;
-
-    private String title;
-
-    private String description;
-
-    private String content;
-
+public class ErrorDetails {
+    private String message;
+    private Date date;
+    public String url;
 
 
 }
