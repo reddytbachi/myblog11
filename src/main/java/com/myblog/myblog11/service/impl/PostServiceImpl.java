@@ -7,6 +7,9 @@ import com.myblog.myblog11.repository.PostRepository;
 import com.myblog.myblog11.service.PostService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -49,6 +52,21 @@ public class PostServiceImpl implements PostService {
         dto.setContent(post.getContent());
 
         return dto;
+    }
+
+    @Override
+    public List<PostDto> getAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        List<PostDto> dtos = posts.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
+        return dtos ;
+    }
+   PostDto mapToDto (Post post){
+       PostDto dto = new PostDto();
+       dto.setId(post.getId());
+       dto.setTitle(post.getTitle());
+       dto.setDescription(post.getDescription ());
+       dto.setContent(post.getContent());
+       return dto;
     }
 
 

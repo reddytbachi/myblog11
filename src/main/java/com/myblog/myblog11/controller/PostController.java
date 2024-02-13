@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
@@ -22,12 +24,17 @@ public class PostController {
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    //http://localhost:8080/api/posts?id=1
+    //http://localhost:8080/api/posts/all?id=1
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<PostDto> getPostById(@RequestParam long id) {
         PostDto dto = postService.getPostById(id);
         return new ResponseEntity<>(dto,HttpStatus.OK);
+    }
+    @GetMapping
+    public List<PostDto> getAllPosts(){
+        List<PostDto> postDtos=postService.getAllPosts();
+        return postDtos;
     }
 
 }
